@@ -6,7 +6,7 @@ In this example we will try to create the Google Calendar Clone using .NET MAUI.
 - Create Core Logics  :white_check_mark:
 - Create Basic View and ViewModels  :white_check_mark:
 - Create Initial version of the UI :white_check_mark:
-- Tweak UI to include Navigation Bar, Correct colors 
+- Tweak UI to include Navigation Bar, Correct colors, Fonts
 - Show Event details
 - Add Calendar Component
 - Finalize 
