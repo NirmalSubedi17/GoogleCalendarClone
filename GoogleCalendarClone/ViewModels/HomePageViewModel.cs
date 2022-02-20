@@ -1,19 +1,25 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using Dawn;
 using GoogleCalendarClone.Models;
+using GoogleCalendarClone.Services;
 
 namespace GoogleCalendarClone.ViewModels
 {
-	public class HomePageViewModel : BindableObject
+    public class HomePageViewModel : BaseViewModel
 	{
-		public HomePageViewModel()
+		public HomePageViewModel(ICalendarService calendarService)
 		{
+			_calendarService = Guard.Argument(calendarService, nameof(calendarService))
+									.NotNull()
+									.Value;
 
+			_events = calendarService.GetCalendarEvents().ToList();
 		}
 
-		public ReadOnlyObservableCollection<CalendarEvent> Events => _events;
+		public IReadOnlyCollection<CalendarEvent> Events => _events;
+		private List<CalendarEvent> _events;
 
-		private ReadOnlyObservableCollection<CalendarEvent> _events = new ReadOnlyObservableCollection<CalendarEvent>();
+		private readonly ICalendarService _calendarService;
 	}
 }
 

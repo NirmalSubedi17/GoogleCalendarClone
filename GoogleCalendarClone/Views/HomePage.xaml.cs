@@ -1,4 +1,5 @@
-﻿using GoogleCalendarClone.ViewModels;
+﻿using GoogleCalendarClone.Services;
+using GoogleCalendarClone.ViewModels;
 
 namespace GoogleCalendarClone.Views;
 
@@ -7,7 +8,7 @@ public partial class HomePage : ContentPage
 	public HomePage()
 	{
 		InitializeComponent();
-		this.BindingContext = new HomePageViewModel();
+		var calenderService = new CalendarService();
+		this.BindingContext = new HomePageViewModel(calenderService);
 	}
 }
-
