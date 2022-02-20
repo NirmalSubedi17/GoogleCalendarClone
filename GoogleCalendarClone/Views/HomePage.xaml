@@ -2,7 +2,5 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GoogleCalendarClone.Views.HomePage"
              BackgroundColor="{DynamicResource SecondaryColor}">
-    <CollectionView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
-        
-    </CollectionView>
+    <Label Text="Hello World!" Margin="50" />
 </ContentPage>

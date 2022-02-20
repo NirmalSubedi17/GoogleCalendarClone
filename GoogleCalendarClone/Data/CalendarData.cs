@@ -27,7 +27,7 @@ namespace GoogleCalendarClone.Data
 							var luckyMinute = random.Next(1, 59);
 
 							var luckyEvent = new CalendarEvent("Random Event",
-								new DateTimeOffset(year, month, day, luckyHour, luckyMinute, 0, DateTimeOffset.Now.TimeOfDay));
+								new DateTimeOffset(year, month, day, luckyHour, luckyMinute, 0, DateTimeOffset.Now.Offset));
 
 							result.Add(luckyEvent);
 						}
