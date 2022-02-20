@@ -5,21 +5,29 @@ using GoogleCalendarClone.Services;
 
 namespace GoogleCalendarClone.ViewModels
 {
-    public class HomePageViewModel : BaseViewModel
+	public class HomePageViewModel : BaseViewModel
 	{
 		public HomePageViewModel(ICalendarService calendarService)
 		{
-			_calendarService = Guard.Argument(calendarService, nameof(calendarService))
-									.NotNull()
-									.Value;
+			Guard.Argument(calendarService, nameof(calendarService))
+								   .NotNull();
 
-			_events = calendarService.GetCalendarEvents().ToList();
+			LoadEvents(calendarService.GetCalendarEvents());
 		}
 
-		public IReadOnlyCollection<CalendarEvent> Events => _events;
-		private List<CalendarEvent> _events;
+		private void LoadEvents(IEnumerable<CalendarEvent> events)
+		{
+			var result = events
+				.GroupBy(x => new DateTimeOffset(new DateTime(x.EventTimestamp.Year, x.EventTimestamp.Month, x.EventTimestamp.Day), x.EventTimestamp.Offset))
+				.Select(x => new GroupedEvents(x.Key, x.ToList()));
 
-		private readonly ICalendarService _calendarService;
+			_events = result.ToList();
+
+		}
+
+		public IReadOnlyCollection<GroupedEvents> Events => _events;
+		private List<GroupedEvents> _events;
+
 	}
 }
 
